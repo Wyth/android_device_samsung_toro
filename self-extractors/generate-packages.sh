@@ -27,38 +27,25 @@
 # 262866 = IMM30D
 # 299849 = IMM76D
 # end ics-mr1
-# start jb-dev
+# start jellybean
 # 241968 = IRM03
-# 397816 = JRO03B
-# 398337 = JRO03C
-# 405518 = JRO03H
-# 438695 = JRO03R
-# 463694 = JZ054G
-# end jb-dev
-# start jb-mr1-dev
-# 465036 = JOO75
-# end jb-mr1-dev
-BRANCH=jb-mr1-dev
+# end jellybean
+BRANCH=jellybean
 if test $BRANCH=ics-mr1
 then
   ZIP=mysid-ota-299849.zip
   BUILD=imm76d
 fi #ics-mr1
-if test $BRANCH=jb-dev
+if test $BRANCH=jellybean
 then
-  ZIP=mysid-ota-405518.zip
-  BUILD=jro03h
-fi # jb-dev
-if test $BRANCH=jb-mr1-dev
-then
-  ZIP=mysid-ota-465036.zip
-  BUILD=joo75
-fi # jb-mr1-dev
+  ZIP=mysid-ota-241968.zip
+  BUILD=irm03
+fi # jellybean
 ROOTDEVICE=toro
 DEVICE=toro
 MANUFACTURER=samsung
 
-for COMPANY in broadcom csr imgtec invensense nxp samsung ti widevine
+for COMPANY in broadcom csr imgtec invensense nxp samsung ti
 do
   echo Processing files from $COMPANY
   rm -rf tmp
@@ -128,11 +115,6 @@ do
             system/vendor/firmware/ducati-m3.bin \
             "
     ;;
-  widevine)
-    TO_EXTRACT="\
-            system/lib/libdrmdecrypt.so \
-            "
-    ;;
   esac
   echo \ \ Extracting files from OTA package
   for ONE_FILE in $TO_EXTRACT
@@ -142,6 +124,14 @@ do
     if test $ONE_FILE = system/vendor/bin/gpsd -o $ONE_FILE = system/vendor/bin/pvrsrvinit -o $ONE_FILE = system/bin/fRom
     then
       chmod a+x $FILEDIR/$(basename $ONE_FILE) || echo \ \ \ \ Error chmoding $ONE_FILE
+    fi
+    if test $(echo $ONE_FILE | grep \\.apk\$ | wc -l) = 1
+    then
+      echo \ \ \ \ Splitting $ONE_FILE
+      mkdir -p $FILEDIR/$(basename $ONE_FILE).parts || echo \ \ \ \ Error making parts dir for $ONE_FILE
+      unzip $FILEDIR/$(basename $ONE_FILE) -d $FILEDIR/$(basename $ONE_FILE).parts > /dev/null || echo \ \ \ \ Error unzipping $ONE_FILE
+      rm $FILEDIR/$(basename $ONE_FILE) || echo \ \ \ \ Error removing original $ONE_FILE
+      rm -rf $FILEDIR/$(basename $ONE_FILE).parts/META-INF || echo \ \ \ \ Error removing META-INF for $ONE_FILE
     fi
   done
   echo \ \ Setting up $COMPANY-specific makefiles
