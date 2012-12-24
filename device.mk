@@ -30,6 +30,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.cdma.home.operator.numeric=310004 \
 	ro.cdma.home.operator.alpha=Verizon \
 	ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
+        ro.killrom.version=KILLRToro \
 	ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
 	ro.cdma.otaspnumschema=SELC,1,80,99
 

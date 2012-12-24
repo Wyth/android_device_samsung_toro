@@ -26,11 +26,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/toro/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
     device/sample/etc/apns-conf_verizon.xml:system/etc/apns-conf.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> b5a28b54717a7cdaacbe42b287aadeb3b3777fce
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
