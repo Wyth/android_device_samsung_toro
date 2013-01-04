@@ -45,3 +45,6 @@ PRODUCT_BRAND := Google
 PRODUCT_MODEL := Galaxy Nexus
 PRODUCT_MANUFACTURER := Samsung
 PRODUCT_RESTRICT_VENDOR_FILES := false
+
+#Set build fingerprint / ID / Product Name ect.
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=mysid BUILD_FINGERPRINT="google/mysid/toro:4.1.1/JRO03O/424425:user/release-keys" PRIVATE_BUILD_DESC="mysid-user 4.1.1 JRO03O 424425 release-keys"
