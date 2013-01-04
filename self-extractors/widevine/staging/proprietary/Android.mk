@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Copyright (C) 2011 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-fastboot flash bootloader bootloader-toro-primekj10.img
-fastboot reboot-bootloader
-sleep 5
-fastboot flash radio-cdma radio-cdma-toro-i515.ek01.img
-fastboot reboot-bootloader
-sleep 5
-fastboot flash radio radio-toro-i515.ek02.img
-fastboot reboot-bootloader
-sleep 5
-fastboot -w update image-mysid-itl41d.zip
+LOCAL_PATH := $(call my-dir)
+
+ifeq ($(TARGET_DEVICE),toro)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libdrmdecrypt
+LOCAL_SRC_FILES := libdrmdecrypt.so
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_OWNER := widevine
+include $(BUILD_PREBUILT)
+
+endif

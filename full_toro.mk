@@ -21,6 +21,10 @@
 # lines, full and toro, hence its name.
 #
 
+# Camera and Gallery
+PRODUCT_PACKAGES := \
+    Gallery
+
 #if we do this after the full_base_telephony is included some of these don't get picked up..
 PRODUCT_COPY_FILES += \
     device/samsung/toro/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
@@ -37,7 +41,7 @@ $(call inherit-product, device/samsung/toro/device_vzw.mk)
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_toro
 PRODUCT_DEVICE := toro
-PRODUCT_RESTRICT_VENDOR_FILES := false
 PRODUCT_BRAND := Google
 PRODUCT_MODEL := Galaxy Nexus
 PRODUCT_MANUFACTURER := Samsung
+PRODUCT_RESTRICT_VENDOR_FILES := false
