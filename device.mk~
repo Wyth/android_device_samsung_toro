@@ -30,7 +30,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.TDKRom.version=1-22
+    ro.killrom.version=KILLRToro
 
 $(call inherit-product, device/samsung/tuna/device.mk)
 $(call inherit-product-if-exists, vendor/samsung/toro/device-vendor.mk)
